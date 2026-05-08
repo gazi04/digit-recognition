@@ -1,8 +1,8 @@
 from typing import Dict
 from numpy.random import randn
 from pandas import read_csv
-from numpy import dot, ndarray
-from .activation_functions import relu, sigmoid, softmax
+from numpy import dot, log, ndarray, sum
+from .activation_functions import one_hot, relu, sigmoid, softmax
 
 
 def main():
@@ -27,6 +27,10 @@ def feed_forward(w1: ndarray, b1: ndarray, w2: ndarray, b2: ndarray, x):
     a2 = softmax(z2)
 
     return z1, a1, z2, a2
+
+def calculate_loss(predictions: ndarray, results: ndarray):
+    results = one_hot(results)
+    return -(sum(results) * log(predictions))
 
 if __name__ == "__main__":
     main()
